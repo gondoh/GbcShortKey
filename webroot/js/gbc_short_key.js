@@ -1,7 +1,7 @@
 ;(function($){
 	$(function(){
 		var $contentElm  = $("#ContentsBody");
-		var toolbar = null;
+		var toolbar = "";
 		
 		// 保存
 		var $form = $contentElm.find("form:first");
