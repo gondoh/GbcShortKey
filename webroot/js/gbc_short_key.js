@@ -22,12 +22,23 @@
 		var soreppoiUrl = null;
 		// 一番最後の
 		if (soreppoiUrlMatches) {
-			toolbar += "Command + C<新規>";
-			soreppoiUrlMatches = soreppoiUrlMatches[soreppoiUrlMatches.length-1].match(/href=("(.*)"|'(.*)')/);
+			toolbar += "Ctrl + N<新規>";
 			// 3番目
+			soreppoiUrlMatches = soreppoiUrlMatches[soreppoiUrlMatches.length-1].match(/href=("(.*?)"|'(.*?)')/);
 			soreppoiUrl = soreppoiUrlMatches[2];
+			
+			// もっと適したものの検索
+			// Row1を探してみる
+			$(".list-table tr th a").each(function(){
+				if (/\/add/.test(this.href)) {
+					soreppoiUrl = this.href;
+				}
+			});
+			
+			
+			
 			$(window).keydown( function ( event ){
-				if( event.metaKey === true && event.which === 67 ){
+				if( event.ctrlKey === true && event.which === 78 ){
 					location.href = soreppoiUrl;
 					return false;
 				}
