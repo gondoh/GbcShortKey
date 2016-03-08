@@ -6,7 +6,7 @@
 		// 保存
 		var $form = $contentElm.find("form:first");
 		// 全部で動くと危ないのでadd / editのみ動作
-		if ($form.length && /(\/add$|\/edit\/)/.test(location.href)) {
+		if ($form.length && /(\/add($|#.*?)|\/edit\/)/.test(location.href)) {
 			toolbar += "Command + Enter<保存> \\n";
 			$(window).keydown( function ( event ){
 				if( event.metaKey === true && event.which === 13 ){
@@ -18,7 +18,7 @@
 		
 		// 新規作成
 		// それっぽいのを見つける
-		var soreppoiUrlMatches = $contentElm.html().match(/href=(".*?\/add(\/.*?|)")|('.*?\/add(\/.*?|#.*?|)')/ig);
+		var soreppoiUrlMatches = $contentElm.html().match(/href=(".*?\/add(\/.*?|#.*?|)")|('.*?\/add(\/.*?|#.*?|)')/ig);
 		var soreppoiUrl = null;
 		// 一番最後の
 		if (soreppoiUrlMatches) {
