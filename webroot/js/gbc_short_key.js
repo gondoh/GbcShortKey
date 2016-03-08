@@ -18,10 +18,10 @@
 		
 		// 新規作成
 		// それっぽいのを見つける
-		var soreppoiUrlMatches = $contentElm.html().match(/href=(".*?\/add(\/.*?|)")|('.*?\/add(\/.*?|)')/ig);
+		var soreppoiUrlMatches = $contentElm.html().match(/href=(".*?\/add(\/.*?|)")|('.*?\/add(\/.*?|#.*?|)')/ig);
 		var soreppoiUrl = null;
 		// 一番最後の
-		if (soreppoiUrlMatches.length) {
+		if (soreppoiUrlMatches) {
 			toolbar += "Command + C<新規>";
 			soreppoiUrlMatches = soreppoiUrlMatches[soreppoiUrlMatches.length-1].match(/href=("(.*)"|'(.*)')/);
 			// 3番目
