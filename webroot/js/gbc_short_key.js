@@ -35,6 +35,8 @@
 		}
 		
 		// ツールバーにショートカットを表示する
-		$("#ToolMenu ul").append("<li><a onclick='alert(\"" + toolbar + "\");' style='color:#FAA;'>GbcShotKey有効</a></li>");
+		if (toolbar) {
+			$("#ToolMenu ul").append("<li><a onclick='alert(\"" + toolbar + "\");' style='color:#FAA;'>GbcShotKey有効</a></li>");
+		}
 	});
 })(jQuery);
