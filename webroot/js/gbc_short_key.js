@@ -1,12 +1,12 @@
 ;(function($){
 	$(function(){
 		var $contentElm  = $("#ContentsBody");
-		var toolbar = null;
+		var toolbar = "";
 		
 		// 保存
 		var $form = $contentElm.find("form:first");
 		// 全部で動くと危ないのでadd / editのみ動作
-		if ($form.length && /(\/add$|\/edit\/)/.test(location.href)) {
+		if ($form.length && /(\/add($|#.*?)|\/edit\/)/.test(location.href)) {
 			toolbar += "Command + Enter<保存> \\n";
 			$(window).keydown( function ( event ){
 				if( event.metaKey === true && event.which === 13 ){
@@ -18,16 +18,27 @@
 		
 		// 新規作成
 		// それっぽいのを見つける
-		var soreppoiUrlMatches = $contentElm.html().match(/href=(".*?\/add(\/.*?|)")|('.*?\/add(\/.*?|)')/ig);
+		var soreppoiUrlMatches = $contentElm.html().match(/href=(".*?\/add(\/.*?|#.*?|)")|('.*?\/add(\/.*?|#.*?|)')/ig);
 		var soreppoiUrl = null;
 		// 一番最後の
-		if (soreppoiUrlMatches.length) {
-			toolbar += "Command + C<新規>";
-			soreppoiUrlMatches = soreppoiUrlMatches[soreppoiUrlMatches.length-1].match(/href=("(.*)"|'(.*)')/);
+		if (soreppoiUrlMatches) {
+			toolbar += "Ctrl + N<新規>";
 			// 3番目
+			soreppoiUrlMatches = soreppoiUrlMatches[soreppoiUrlMatches.length-1].match(/href=("(.*?)"|'(.*?)')/);
 			soreppoiUrl = soreppoiUrlMatches[2];
+			
+			// もっと適したものの検索
+			// Row1を探してみる
+			$(".list-table tr th a").each(function(){
+				if (/\/add/.test(this.href)) {
+					soreppoiUrl = this.href;
+				}
+			});
+			
+			
+			
 			$(window).keydown( function ( event ){
-				if( event.metaKey === true && event.which === 67 ){
+				if( event.ctrlKey === true && event.which === 78 ){
 					location.href = soreppoiUrl;
 					return false;
 				}
